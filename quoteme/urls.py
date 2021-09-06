@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from quoteme.quotes.views import quotes_list_create_view, quote_update_destroy_view
+from quoteme.quotes.views import (
+    quotes_list_create_view,
+    quote_update_destroy_view,
+    quotes_bulk_create_view
+)
 
+app_name = "quotes"
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('quotes', quotes_list_create_view),
-    path('quotes/<int:quote_id>', quote_update_destroy_view)
+    path('quotes', quotes_list_create_view, name="quotes"),
+    path('quotes/bulk-create', quotes_bulk_create_view, name="quotes-bulk"),
+    path('quotes/<int:quote_id>', quote_update_destroy_view, name="quote")
 ]
